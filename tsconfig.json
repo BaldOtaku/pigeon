@@ -15,7 +15,7 @@
     "noImplicitReturns": true
   },
   "include": [
-    "src",
+    "src/**/*.ts",
     "vite.config.ts",
     ".eslintrc.js"
   ]
