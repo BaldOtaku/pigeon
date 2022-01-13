@@ -1,7 +1,7 @@
 {
   "name": "buibui",
   "version": "0.0.1",
-  "description": "HTTP request library for browser",
+  "description": "Simplified HTTP request library for browser",
   "author": "BaldOtaku",
   "license": "MIT",
   "main": "./dist/buibui.umd.js",
