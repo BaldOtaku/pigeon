@@ -1,7 +1,7 @@
 import { BuibuiRequestConfig } from './types';
 
 export default function xhr(config: BuibuiRequestConfig) {
-  const { url, method = 'get', data = null } = config;
+  const { url, method = 'GET', data = null } = config;
 
   const request = new XMLHttpRequest();
 
