@@ -4,25 +4,6 @@
   "description": "Simplified HTTP request library for browser",
   "author": "BaldOtaku",
   "license": "MIT",
-  "main": "./dist/buibui.umd.js",
-  "module": "./dist/buibui.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/buibui.es.js",
-      "require": "./dist/buibui.umd.js"
-    }
-  },
-  "files": [
-    "./dist"
-  ],
-  "keywords": [
-    "http",
-    "ajax"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BaldOtaku/buibui"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
