@@ -3,7 +3,7 @@ export function isDate(value: any): value is Date {
 }
 
 export function isObject(value: any): value is Object {
-  return Object.prototype.toString.call(value) === '[object Object]';
+  return value !== null && typeof value === 'object';
 }
 
 export function isArray(value: any): value is [] {
