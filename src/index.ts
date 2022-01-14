@@ -1,8 +1,26 @@
-import { BuibuiRequestConfig } from './types';
+import { BiubiuRequestConfig } from './types';
 import xhr from './xhr';
+import { urlFormat, transformRequestBody } from './utils/transform';
 
-function buibui(config: BuibuiRequestConfig) {
+function biubiu(config: BiubiuRequestConfig) {
+  processConfig(config);
   xhr(config);
 }
 
-export default buibui;
+function processConfig(config: BiubiuRequestConfig) {
+  if (config.method === 'get' || config.method === 'GET') {
+    config.url = transformUrl(config);
+  } else {
+    config.data = transformRequestData(config);
+  }
+}
+
+function transformUrl(config: BiubiuRequestConfig) {
+  return urlFormat(config.url, config.data);
+}
+
+function transformRequestData(config: BiubiuRequestConfig) {
+  return transformRequestBody(config.data);
+}
+
+export default biubiu;

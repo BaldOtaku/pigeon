@@ -7,7 +7,7 @@ export type Method = 'get' | 'GET'
 | 'trace' | 'TRACE'
 | 'connect' | 'CONNECT';
 
-export interface BuibuiRequestConfig {
+export interface BiubiuRequestConfig {
   url: string
   header?: string
   method?: Method

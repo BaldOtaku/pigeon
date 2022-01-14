@@ -24,3 +24,10 @@ export function urlFormat(url: string, data?: any) {
   }
   return url;
 }
+
+export function transformRequestBody(data: any) {
+  if (isObject(data)) {
+    return JSON.stringify(data);
+  }
+  return data;
+}
