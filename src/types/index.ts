@@ -7,7 +7,7 @@ export type Method = 'get' | 'GET'
 | 'trace' | 'TRACE'
 | 'connect' | 'CONNECT';
 
-export interface BiubiuRequestConfig {
+export interface PigenoRequestConfig {
   url: string
   header?: string
   method?: Method

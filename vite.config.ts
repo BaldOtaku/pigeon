@@ -5,8 +5,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
-      name: 'biubiu',
-      fileName: (format) => `biubiu.${format}.js`,
+      name: 'pigeno',
+      fileName: (format) => `pigeno.${format}.js`,
     },
   },
 });
