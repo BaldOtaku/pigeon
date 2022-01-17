@@ -1,9 +1,28 @@
 {
-  "name": "pigeno",
+  "name": "@zoo/pigeno",
   "version": "0.0.1",
   "description": "Simplified HTTP request library for browser",
   "author": "BaldOtaku",
   "license": "MIT",
+  "main": "./dist/pigeno.umd.js",
+  "module": "./dist/pigeno.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/pigeno.es.js",
+      "require": "./dist/pigeno.umd.js"
+    }
+  },
+  "files": [
+    "./dist"
+  ],
+  "keywords": [
+    "http",
+    "ajax"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BaldOtaku/pigeno"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
