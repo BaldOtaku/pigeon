@@ -5,8 +5,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
-      name: 'pigeno',
-      fileName: (format) => `pigeno.${format}.js`,
+      name: 'pigeon',
+      fileName: (format) => `pigeon.${format}.js`,
     },
   },
 });

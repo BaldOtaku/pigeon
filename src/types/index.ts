@@ -7,7 +7,7 @@ export type Method = 'get' | 'GET'
 | 'trace' | 'TRACE'
 | 'connect' | 'CONNECT';
 
-export interface PigenoRequestConfig {
+export interface PigeonRequestConfig {
   url: string
   header?: string
   method?: Method

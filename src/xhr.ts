@@ -1,6 +1,6 @@
-import { PigenoRequestConfig } from './types';
+import { PigeonRequestConfig } from './types';
 
-export default function xhr(config: PigenoRequestConfig) {
+export default function xhr(config: PigeonRequestConfig) {
   const { url, method = 'GET', data = null } = config;
 
   const request = new XMLHttpRequest();
