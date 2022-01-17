@@ -9,3 +9,11 @@ export function isObject(value: any): value is Object {
 export function isArray(value: any): value is [] {
   return Array.isArray(value);
 }
+
+export function isGET(value: string) {
+  return value === 'get' || value === 'GET';
+}
+
+export function isPOST(value: string) {
+  return value === 'post' || value === 'POST';
+}

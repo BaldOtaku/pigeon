@@ -1,6 +1,7 @@
 import { PigeonRequestConfig } from './types';
 import xhr from './xhr';
 import { urlFormat, transformRequestBody } from './utils/transform';
+import { isGET } from './utils/validate';
 
 function pigeon(config: PigeonRequestConfig) {
   processConfig(config);
@@ -8,7 +9,10 @@ function pigeon(config: PigeonRequestConfig) {
 }
 
 function processConfig(config: PigeonRequestConfig) {
-  if (config.method === 'get' || config.method === 'GET') {
+  if (!config.method) {
+    config.method = 'GET';
+  }
+  if (isGET(config.method)) {
     config.url = transformUrl(config);
   } else {
     config.data = transformRequestData(config);
