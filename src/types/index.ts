@@ -9,7 +9,7 @@ export type Method = 'get' | 'GET'
 
 export interface PigeonRequestConfig {
   url: string
-  header?: string
+  header?: any
   method?: Method
   data?: string
 }

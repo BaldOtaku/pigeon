@@ -10,10 +10,10 @@ export function isArray(value: any): value is [] {
   return Array.isArray(value);
 }
 
-export function isGET(value: string) {
+export function isGET(value: any) {
   return value === 'get' || value === 'GET';
 }
 
-export function isPOST(value: string) {
+export function isPOST(value: any) {
   return value === 'post' || value === 'POST';
 }

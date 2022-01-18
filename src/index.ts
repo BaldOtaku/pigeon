@@ -1,7 +1,9 @@
 import { PigeonRequestConfig } from './types';
 import xhr from './xhr';
-import { urlFormat, transformRequestBody } from './utils/transform';
 import { isGET } from './utils/validate';
+import { formatUrl } from './utils/url';
+import { processHeader } from './utils/headers';
+import { transformRequestBody } from './utils/transform';
 
 function pigeon(config: PigeonRequestConfig) {
   processConfig(config);
@@ -12,19 +14,25 @@ function processConfig(config: PigeonRequestConfig) {
   if (!config.method) {
     config.method = 'GET';
   }
-  if (isGET(config.method)) {
-    config.url = transformUrl(config);
-  } else {
-    config.data = transformRequestData(config);
+  config.url = handleUrl(config);
+  config.header = handleHeader(config);
+  config.data = handleRequestData(config);
+}
+
+function handleUrl(config: PigeonRequestConfig) {
+  const { url, method, data } = config;
+  if (isGET(method)) {
+    return formatUrl(url, data);
   }
+  return url;
 }
 
-function transformUrl(config: PigeonRequestConfig) {
-  return urlFormat(config.url, config.data);
-}
-
-function transformRequestData(config: PigeonRequestConfig) {
+function handleRequestData(config: PigeonRequestConfig) {
   return transformRequestBody(config.data);
+}
+
+function handleHeader(config: PigeonRequestConfig) {
+  return processHeader(config);
 }
 
 export default pigeon;
