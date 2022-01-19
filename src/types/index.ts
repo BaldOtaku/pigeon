@@ -9,7 +9,21 @@ export type Method = 'get' | 'GET'
 
 export interface PigeonRequestConfig {
   url: string
-  header?: any
+  headers?: any
   method?: Method
   data?: string
+  responseType?: XMLHttpRequestResponseType
+}
+
+export interface PigeonResponse {
+  status: number
+  statusText: string
+  data: any
+  headers: any
+  request: any
+  config: PigeonRequestConfig
+}
+
+export interface PigeonPromise extends Promise<PigeonResponse> {
+
 }

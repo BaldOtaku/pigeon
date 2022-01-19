@@ -3,11 +3,14 @@ import xhr from './xhr';
 import { isGET } from './utils/validate';
 import { formatUrl } from './utils/url';
 import { processHeader } from './utils/headers';
-import { transformRequestBody } from './utils/transform';
+import { transformRequestBody, transformResponse } from './utils/data';
 
 function pigeon(config: PigeonRequestConfig) {
   processConfig(config);
-  xhr(config);
+  return xhr(config).then((res) => {
+    res.data = transformResponse(res.data);
+    return res;
+  });
 }
 
 function processConfig(config: PigeonRequestConfig) {
@@ -15,7 +18,7 @@ function processConfig(config: PigeonRequestConfig) {
     config.method = 'GET';
   }
   config.url = handleUrl(config);
-  config.header = handleHeader(config);
+  config.headers = handleHeader(config);
   config.data = handleRequestData(config);
 }
 

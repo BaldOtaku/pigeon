@@ -14,12 +14,29 @@ function normalizeHeaderName(header: any, normalizedName: string) {
 }
 
 export function processHeader(config: PigeonRequestConfig) {
-  const { method = 'GET', header = {}, data } = config;
+  const { method = 'GET', headers = {}, data } = config;
 
-  normalizeHeaderName(header, 'content-type');
-  if (isObject(data) && !isGET(method) && !header['content-type']) {
-    header['content-type'] = 'application/json;charset=UTF-8';
+  normalizeHeaderName(headers, 'content-type');
+  if (isObject(data) && !isGET(method) && !headers['content-type']) {
+    headers['content-type'] = 'application/json;charset=UTF-8';
   }
 
-  return header;
+  return headers;
+}
+
+export function parseHeaders(headers: string) {
+  const paresd = Object.create(null);
+  if (!headers) {
+    return paresd;
+  }
+  headers.split('\r\n').forEach((row) => {
+    let [key, value] = row.split(':');
+    key = key.trim().toLowerCase();
+    if (!key) {
+      return;
+    }
+    value = value && value.trim();
+    paresd[key] = value;
+  });
+  return paresd;
 }

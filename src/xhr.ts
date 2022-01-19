@@ -1,20 +1,46 @@
-import { PigeonRequestConfig } from './types';
+import { PigeonRequestConfig, PigeonPromise, PigeonResponse } from './types';
+import { parseHeaders } from './utils/headers';
 
-export default function xhr(config: PigeonRequestConfig) {
-  const {
-    url,
-    header,
-    method = 'GET',
-    data = null,
-  } = config;
+export default function xhr(config: PigeonRequestConfig): PigeonPromise {
+  return new Promise((resolve) => {
+    const {
+      url,
+      headers,
+      method = 'GET',
+      data = null,
+      responseType,
+    } = config;
 
-  const request = new XMLHttpRequest();
+    const request = new XMLHttpRequest();
 
-  request.open(method.toUpperCase(), url, true);
+    if (responseType) {
+      request.responseType = responseType;
+    }
 
-  Object.keys(header).forEach((name) => {
-    request.setRequestHeader(name, header[name]);
+    request.open(method.toUpperCase(), url, true);
+
+    request.onreadystatechange = function handleLoad() {
+      if (request.readyState !== 4) {
+        return;
+      }
+      const responseHeaders = request.getAllResponseHeaders();
+      const responseData = responseType !== 'text' ? request.response : request.responseText;
+      const response: PigeonResponse = {
+        config,
+        request,
+        status: request.status,
+        statusText: request.statusText,
+        headers: parseHeaders(responseHeaders),
+        data: responseData,
+      };
+
+      resolve(response);
+    };
+
+    Object.keys(headers).forEach((name) => {
+      request.setRequestHeader(name, headers[name]);
+    });
+
+    request.send(data);
   });
-
-  request.send(data);
 }
