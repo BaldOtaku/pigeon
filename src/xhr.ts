@@ -1,14 +1,16 @@
 import { PigeonRequestConfig, PigeonPromise, PigeonResponse } from './types';
 import { parseHeaders } from './utils/headers';
+import { createError } from './helpers/error';
 
 export default function xhr(config: PigeonRequestConfig): PigeonPromise {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const {
       url,
       headers,
       method = 'GET',
       data = null,
       responseType,
+      timeout,
     } = config;
 
     const request = new XMLHttpRequest();
@@ -17,12 +19,24 @@ export default function xhr(config: PigeonRequestConfig): PigeonPromise {
       request.responseType = responseType;
     }
 
+    if (timeout) {
+      request.timeout = timeout;
+    }
+
     request.open(method.toUpperCase(), url, true);
+
+    request.onerror = function handleError() {
+      reject(createError('Network Error', config, null, request));
+    };
 
     request.onreadystatechange = function handleLoad() {
       if (request.readyState !== 4) {
         return;
       }
+      if (request.status === 0) {
+        return;
+      }
+
       const responseHeaders = request.getAllResponseHeaders();
       const responseData = responseType !== 'text' ? request.response : request.responseText;
       const response: PigeonResponse = {
@@ -34,7 +48,11 @@ export default function xhr(config: PigeonRequestConfig): PigeonPromise {
         data: responseData,
       };
 
-      resolve(response);
+      handleResponse(response);
+    };
+
+    request.ontimeout = function handleTimeout() {
+      reject(createError('Timeout', config, null, request));
     };
 
     Object.keys(headers).forEach((name) => {
@@ -42,5 +60,13 @@ export default function xhr(config: PigeonRequestConfig): PigeonPromise {
     });
 
     request.send(data);
+
+    function handleResponse(response: PigeonResponse) {
+      if (response.status >= 200 && response.status < 300) {
+        resolve(response);
+      } else {
+        reject(createError(`errorCode ${response.status}`, config, null, request, response));
+      }
+    }
   });
 }

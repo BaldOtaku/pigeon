@@ -13,6 +13,7 @@ export interface PigeonRequestConfig {
   method?: Method
   data?: string
   responseType?: XMLHttpRequestResponseType
+  timeout: number
 }
 
 export interface PigeonResponse {
@@ -25,5 +26,12 @@ export interface PigeonResponse {
 }
 
 export interface PigeonPromise extends Promise<PigeonResponse> {
+}
 
+export interface PigeonError {
+  isPigeonError: boolean
+  config: PigeonRequestConfig
+  code?: string | null
+  request?: any
+  response?: PigeonResponse
 }
