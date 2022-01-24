@@ -25,8 +25,6 @@ export class PigeonError extends Error {
     this.request = request;
     this.response = response;
     this.isPigeonError = true;
-
-    // Object.setPrototypeOf(this, PigeonError.prototype);
   }
 }
 
