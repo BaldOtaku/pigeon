@@ -1,4 +1,4 @@
-import { isDate, isObject, isArray } from './validate';
+import { isDate, isObject, isArray } from './is';
 
 export function formatUrl(url: string, data?: any) {
   if (!data || !isObject(data)) {

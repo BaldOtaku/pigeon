@@ -1,6 +1,6 @@
 import { PigeonRequestConfig, PigeonPromise, PigeonResponse } from '../types';
 import { parseHeaders } from '../utils/headers';
-import { createError } from '../helpers/error';
+import { createError } from './error';
 
 export default function xhr(config: PigeonRequestConfig): PigeonPromise {
   return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 import { PigeonRequestConfig } from '../types';
-import { isObject, isGET } from './validate';
+import { isObject, isGET } from './is';
 
 function normalizeHeaderName(header: any, normalizedName: string) {
   if (!header) {

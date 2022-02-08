@@ -1,4 +1,4 @@
-import pigeon from './pigeon';
+import pigeon from './core/pigeon';
 
 export * from './types';
 
