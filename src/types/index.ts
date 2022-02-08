@@ -35,3 +35,15 @@ export interface PigeonError {
   request?: any
   response?: PigeonResponse
 }
+
+export interface PigeonInterceptorManager<T> {
+  use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
+  eject(id: number): void
+}
+
+export interface ResolvedFn<T> {
+  (value: T): T | Promise<T>
+}
+export interface RejectedFn {
+  (error: any): any
+}

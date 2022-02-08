@@ -8,6 +8,12 @@
   <body>
     <script type="module">
       import pigeon from '/src/index.ts'
+
+      pigeon.interceptors.request.use((config) => {
+        console.log('2233');
+        return config
+      })
+
       pigeon({
         url: 'http://yapi.smart-xwork.cn/mock/81274/test',
         data: {
