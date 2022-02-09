@@ -1,11 +1,12 @@
+import { PigeonInstance } from './types';
 import Pigeon from './core/Pigeon';
 
 function createInstance() {
-  const context = new Pigeon();
-  const instance = Pigeon.prototype.request.bind(context);
+  const context: PigeonInstance = new Pigeon();
+  const instance: PigeonInstance = Pigeon.prototype.request.bind(context);
 
   for (const key in context) {
-    (instance as any)[key] = (context as any)[key];
+    instance[key] = context[key];
   }
 
   return instance;

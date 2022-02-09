@@ -8,6 +8,10 @@ export type Method = 'get' | 'GET'
 | 'trace' | 'TRACE'
 | 'connect' | 'CONNECT';
 
+export interface PigeonInstance {
+  [propName: string]: any
+}
+
 export interface PigeonRequestConfig {
   url?: string
   headers?: any
